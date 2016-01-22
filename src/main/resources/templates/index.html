@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Captain J</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
+    <style type="text/css">
+        body {
+        font-family: DOS, STSong, SimSun , Monaco, Menlo, Consolas, "Courier New", monospace;
+        padding-top: 30px;
+        padding-bottom: 40px;
+        visibility: hidden;
+        }
+    </style>
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="https://github.com/dewafer/captainj" target="_blank">Captain J</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="/">Containers</a>
+                    </li>
+                    <li><a>Other Staff</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <div class="hero-unit">
+                <h1>Captain J</h1>
+                <p>The Captain J project is just another user interface for docker-client.</p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="https://github.com/dewafer/captainj" target="_blank">
+                        Learn more...
+                    </a>
+                </p>
+            </div>
+            <h3>Containers</h3>
+            <p>The following table lists all the containers found on the machine.</p>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>Names</th>
+                    <th>Image</th>
+                    <th>command</th>
+                    <th>ports</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="container, iterStat : ${containers}">
+                    <td th:text="${iterStat.count}">no</td>
+                    <td th:text="${#strings.abbreviate(container.id(), 15)}">id</td>
+                    <td th:text="${#strings.listJoin(container.names(), ', ')}">names</td>
+                    <td th:text="${container.image()}">image</td>
+                    <td th:text="${#strings.abbreviate(container.command(), 17)}">command</td>
+                    <td th:text="${#strings.listJoin(container.ports(), ', ')}">ports</td>
+                    <td th:text="${container.status()}">status</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="alert alert-error" th:if="${#lists.isEmpty(containers)}">Oh crap, no containers found on the
+                machine.
+            </div>
+            <p class="lead">The application is still under development...</p>
+        </div>
+    </div>
+</div>
+<script src="../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.js}"></script>
+</body>
+</html>
