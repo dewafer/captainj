@@ -1,35 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="bootstrap :: head">
     <meta charset="UTF-8"/>
     <title>Captain J</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.css}" rel="stylesheet" media="screen"/>
-    <style type="text/css">
-        body {
-        font-family: DOS, STSong, SimSun , Monaco, Menlo, Consolas, "Courier New", monospace;
-        padding-top: 30px;
-        padding-bottom: 40px;
-        visibility: hidden;
-        }
-    </style>
-    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="https://github.com/dewafer/captainj" target="_blank">Captain J</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="active">
-                        <a href="/">Containers</a>
-                    </li>
-                    <li><a>Other Staff</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<div th:replace="bootstrap :: navbar (menu_active='Containers')">
+    navbar
 </div>
 
 <div class="container">
@@ -77,7 +54,6 @@
         </div>
     </div>
 </div>
-<script src="../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
-<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.js}"></script>
+
 </body>
 </html>

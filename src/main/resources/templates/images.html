@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="bootstrap :: head">
+    <meta charset="UTF-8"/>
+    <title>Captain J</title>
+</head>
+<body>
+<div th:replace="bootstrap :: navbar (menu_active='Images')">
+    navbar
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h3>Images</h3>
+            <p>The following table lists all the images found on the machine.</p>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>parentId</th>
+                    <th>Created</th>
+                    <th>RepoTags</th>
+                    <th>Size</th>
+                    <th>Virtual Size</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="image, iterStat : ${images}">
+                    <td th:text="${iterStat.count}">no</td>
+                    <td th:text="${#strings.abbreviate(image.id(), 15)}">id</td>
+                    <td th:text="${#strings.abbreviate(image.parentId(), 15)}">parent id</td>
+                    <td th:text="${image.created()}">created</td>
+                    <td th:text="${#strings.listJoin(image.repoTags(), ', ')}">repoTags</td>
+                    <td th:text="${image.size()}">size</td>
+                    <td th:text="${image.virtualSize()}">v-size</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="alert alert-error" th:if="${#lists.isEmpty(images)}">Oh crap, no images found on the
+                machine.
+            </div>
+            <p class="lead">The application is still under development...</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
